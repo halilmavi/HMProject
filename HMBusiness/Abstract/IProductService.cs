@@ -1,4 +1,5 @@
 ﻿using HMEntities.Concrete;
+using HMEntities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace HMBusiness.Abstract
         // Secmis oldugumuz kategoriye  göre listeleme islemi yapacak olan metodumuz.
         List<Product> GetAllByCategoryId(int id);
         List<Product> GetByUnitPrice(decimal min, decimal max);
+        public List<ProductDetailDto> GetProductDetails();
     }
 }

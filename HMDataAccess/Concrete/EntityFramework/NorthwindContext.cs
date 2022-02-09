@@ -12,7 +12,7 @@ namespace HMDataAccess.Concrete.EntityFramework
     /*
         NorthwindContext class'i icerisinde veritabani tablolar ile projemizde bulunan ana class'lar yani gercek class'lari iliskilendirdigimiz yerdir.
         NorthwindContext'ine DbContext class'i kalitim olarak eklememiz gerekir. Çünkü ;
-            DbContext bir classtır ve Entity Framework’un olmazsa olmazıdır. DBContet veritabanımızla uygulamamız arasında sorgulama, güncelleme, silme gibi
+            DbContext bir classtır ve Entity Framework’un olmazsa olmazıdır. DBContext veritabanımızla uygulamamız arasında sorgulama, güncelleme, silme gibi
                 işlemleri yapmamız için olanak sağlar.Entity framework içinde yer alan bu class aslında her bir varlık yani entity veya her bir model için DBSet barındırır.
         Yani veritabanı içinde yer alan verilerimizle alakalı olarak her türlü süreçte iletişimimizi sağlayan bir classtır.
 

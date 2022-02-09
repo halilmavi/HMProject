@@ -1,6 +1,7 @@
 ﻿using HMCore.DataAccess.EntityFramework;
 using HMDataAccess.Abstract;
 using HMEntities.Concrete;
+using HMEntities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,19 @@ using System.Threading.Tasks;
 
 namespace HMDataAccess.Concrete.EntityFramework
 {
-    public class EfProductDal : EfEntityRepositoryBase <Product, NorthwindContext> , IProductDal
-    {  
-       
+    public class EfProductDal : EfEntityRepositoryBase<Product, NorthwindContext>, IProductDal
+    {
+        public List<ProductDetailDto> GetProductDetails()
+        {
+            using (NorthwindContext context = new NorthwindContext())
+            {
+                // Ürünler ile kategorileri joinleme islemi yaptık. select new ile dönen sonucu süslü parantez icerisindeki ozelliklere gore verecek.
+                var result = from p in context.Products
+                             join c in context.Categories
+                             on p.CategoryId equals c.CategoryId
+                             select new ProductDetailDto { ProductId = p.ProductId, ProductName = p.ProductName, CategoryName = c.CategoryName, UnitsInStock = p.UnitsInStock };
+                return result.ToList();
+            }
+        }
     }
 }

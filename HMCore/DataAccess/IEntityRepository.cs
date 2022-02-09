@@ -30,15 +30,15 @@ namespace HMCore.DataAccess
     #endregion
 
 
-    public interface IEntityRepository<T> where T : class ,IEntity, new()
+    public interface IEntityRepository<T> where T : class, IEntity, new()
     {
         // Expression yapisini filtreleme islemlerinde kullanabilmek icin tanimladik. Yani iş sınıfımızdan parametre olarak gonderilen Linq sorgularını calistirabilmek icin.
         // Kategorilerimizi secitimizde filtreleme islemini yapan metodumuzu Expression yapida tanimladik. filter = null ile filtre vermeden cagirabiliriz.
-        List<T> GetAll(Expression<Func<T,bool>>filter=null); // Tum datayi istedigimiz icin filtre parametresi gondermedik.
-        T Get(Expression<Func<T, bool>> filter ); // Tek bir ürün veya nesne hakkinda detayli bilgi alabilmek icin kullanmış oldugumuz metodumuz. Bunda filtre gonderme zorunlulugumuz vardır.
+        List<T> GetAll(Expression<Func<T, bool>> filter = null); // Tum datayi istedigimiz icin filtre parametresi gondermedik.
+        T Get(Expression<Func<T, bool>> filter); // Tek bir ürün veya nesne hakkinda detayli bilgi alabilmek icin kullanmış oldugumuz metodumuz. Bunda filtre gonderme zorunlulugumuz vardır.
         void Add(T entity);
         void Update(T entity);
         void Delete(T entity);
-        
+
     }
 }
