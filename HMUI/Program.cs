@@ -11,11 +11,27 @@ namespace HMUI
     {
         static void Main(string[] args)
         {
-            //ProductTest();
-            //CategoryTest();
+            // ProductTest();
+            // CategoryTest();
             // ProductDetailsTest();
 
+            ProductManager productManager = new ProductManager(new EfProductDal());
 
+            var result = productManager.GetProductDetails();
+
+            if (result.Success == true)
+            {
+                foreach (var product in productManager.GetAll().Data)
+                {
+                    Console.WriteLine(product.ProductName);
+                    Console.WriteLine(result.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+           
 
 
         }
@@ -23,14 +39,14 @@ namespace HMUI
         private static void ProductDetailsTest()
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
-            foreach (var product in productManager.GetProductDetails())
+            foreach (var product in productManager.GetProductDetails().Data)
             {
                 Console.WriteLine(product.ProductName + " / " + product.CategoryName);
             }
         }
 
         private static void CategoryTest()
-        { 
+        {
             // İş sınıfımız olan CategoryManager da bulunan metotları kullanmak icin tanımladık burada.
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
             foreach (var category in categoryManager.GetAll())
@@ -45,7 +61,7 @@ namespace HMUI
             // IProductDal tipinde bizden parametre istiyor. Interface'ler new'lenemedigi icin interfacemizin referansini tuttugu EfProductDal() sinifini parametre olarak gonderme islemi yapabiliriz.
             // ProductManager'a parametre olarak gondermis oldugumuz new EfProductDal() sinifi Category sinifi turunde nesneyi bize dondurecek.
             ProductManager productManager = new ProductManager(new EfProductDal());
-            foreach (var product in productManager.GetAll())
+            foreach (var product in productManager.GetAll().Data)
             {
                 Console.WriteLine(product.ProductName);
             }
