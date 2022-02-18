@@ -1,5 +1,9 @@
-﻿using HMBusiness.Abstract;
+﻿using FluentValidation;
+using HMBusiness.Abstract;
 using HMBusiness.Constants;
+using HMBusiness.ValidationRules.FluentValidation;
+using HMCore.Aspects.Autofac.Validation;
+using HMCore.CrossCuttingConcerns;
 using HMCore.Utilities.Results;
 using HMDataAccess.Abstract;
 using HMEntities.Concrete;
@@ -21,13 +25,9 @@ namespace HMBusiness.Concrete
             _productDal = productDal;
         }
 
+        [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
-        {
-            if (product.ProductName.Length<2)
-            {
-                return new ErrorResult(Messages.ProductNameInvalid);
-            }
-
+        {        
             _productDal.Add(product);
             return new Result(true,Messages.ProductAdded);
         }
