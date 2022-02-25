@@ -17,7 +17,7 @@ namespace HMUI
 
             ProductManager productManager = new ProductManager(new EfProductDal());
 
-            var result = productManager.GetProductDetails();
+            var result = productManager.GetById(45);
 
             if (result.Success == true)
             {

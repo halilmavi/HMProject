@@ -23,9 +23,12 @@ namespace HMBusiness.DependencyResolvers.Autofac
             builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance();
             builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
 
-            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
-            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();               // GetExecutingAssembly() metodu ile çalışma anında uygulamanın kodlarına erişiriz.
+
+            // Çalışan uygulamalar içerisinde implemente edilmiş interfaceleri bul onlar için AspectInterceptorSelector metodunu çağır ve ValidationAspect attributenun çalışmasını tetikle.
+            // Yani burda yapmış olduğu temel işlem tüm sınıfları gezip Aspect attribute'una sahip sınıfı bulup o sınıfın attribute'nu tetikle.
+            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()               
                 .EnableInterfaceInterceptors(new ProxyGenerationOptions()
                 {
                     Selector = new AspectInterceptorSelector()

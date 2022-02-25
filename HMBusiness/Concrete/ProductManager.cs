@@ -20,12 +20,12 @@ namespace HMBusiness.Concrete
         // Entity framework sınıfını cağırmamamızın sebebi ORM teknolojilerimizi değiştirme durumuna karşı yeniden bu kısımlari düzenlememek için interface uzerinden tanimladik.
         
         IProductDal _productDal; 
-        public ProductManager(IProductDal productDal)
+        public ProductManager(IProductDal productDal)       
         {
             _productDal = productDal;
         }
 
-        [ValidationAspect(typeof(ProductValidator))]
+        [ValidationAspect(typeof(ProductValidator))]        // Add metodunu ProductValidator'da tanımlı kuralları kullanarak ValidationAspect ile doğrulama işlemi yap komutunu tanımlama işlemi yaptık.
         public IResult Add(Product product)
         {        
             _productDal.Add(product);

@@ -16,22 +16,22 @@ namespace HMCore.Utilities.Results
         */
 
 
-        public Result(bool success, string message ):this(success)
+        public Result(bool success, string message) : this(success)
         {
             Message = message;
-              
+
         }
 
 
         // İkinci constructor metodumuzu tanimladik. Overload etme islemi tanimladik.
         public Result(bool success)
         {
-           
+
             Success = success;
         }
 
-        // Ürünlerle ilgili islemleri yaparken bilgi verecek olan propertylerimizi get seklinde tanimladik. sadece okunabilir bir yapıda tanimlama islemi yaptik.
-        public bool Success { get;}
+        // Ürünlerle ilgili islemleri yaparken bilgi verecek olan propertylerimizi get seklinde tanimladik. Sadece okunabilir bir yapıda tanimlama islemi yaptik.
+        public bool Success { get; }
 
         public string Message { get; }
     }

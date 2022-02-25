@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace HMBusiness.ValidationRules.FluentValidation
 {
-    // Product 
+    // AbstractValidator içerisine parametre olarak göndermiş olduğuöuz tip ile ilgili doğrulama kuralları tanımlıyoruz.
     public class ProductValidator : AbstractValidator<Product>
     {
+        //Tanımlayacak olduğumuz doğrulama kurallarını mutlaka bir constructor içerisine tanımlamamız gerekir.
         public ProductValidator()
         {
-            // Product tablosundaki nesnelerimiz ile ilgili doğrulama kurallarımızı burada tanımlama işlemi yaptık.
+            // Product tablosundaki nesnelerimiz ile ilgili doğrulama kurallarımızı burada tanımlama işlemi yaptık. 
             RuleFor(p => p.ProductName).NotEmpty();         // Ürün ismi boş olamaz.
             RuleFor(p => p.ProductName).MinimumLength(2);   // ürün ismi 2 karakterden az olamaz.
             RuleFor(p => p.UnitPrice).NotEmpty();           // Ürün fiyatı boş olamaz.
@@ -26,6 +27,7 @@ namespace HMBusiness.ValidationRules.FluentValidation
         {
             // arg parametresi ProductName'nin değerini göndermektedir. Gelen bu degeri C# 'ın kendi metodu ile sorguluyoruz. A harfi ile başlıyorsa true değilse false döndürüyor.
             return arg.StartsWith("A");
+            
         }
     }
 }

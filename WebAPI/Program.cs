@@ -19,11 +19,12 @@ namespace WebAPI
             CreateHostBuilder(args).Build().Run();
         }
 
-        // .NetCore da varsayýlan IoC  kullanmak yerine farklý bir IoC container'i (autofac) kullanmak istedigimizi Program sýnýfý içerisinde tanimliyoruz.
+        // IHostBuilder bizim server ile konfigürasyonun olduðu yerdir.
+        // .NetCore da varsayýlan IoC  kullanmak yerine farklý bir IoC container'i (autofac) kullanmak istediðimizi Program sýnýfý içerisinde tanýmlýyoruz.
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseServiceProviderFactory(new AutofacServiceProviderFactory())     
-                .ConfigureContainer<ContainerBuilder>(builder =>
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory())  // .NET Core' un varsayýlan yapýsýný kullanmak yerine kendi IOC'imizi yani Autofac yapýsýný kullanacaðýmýzý tanýmlýyoruz.
+                .ConfigureContainer<ContainerBuilder>(builder =>                 // Burdada HMBusiness.DependencyResolvers.Autofac klasöründe tanýmlamýþ olduðumuz AutofacBusinessModule sýnýfý bildiriyoruz.
                 {
                     builder.RegisterModule(new AutofacBusinessModule());
                 })

@@ -11,6 +11,7 @@ namespace HMCore.Utilities.Results
     // Sınıfı ve interface kalıtım olarak eklediğimiz için implemente etmemiz gerekiyor.
     public class DataResult<T> : Result, IDataResult<T>
     {
+        // DataResult sınıfı kalıtım olarak almış olduğu Result sınıfının içerisinde ki success ve message ye parametre göndermek icin DataResult constructorımıza parametre gönderme işlemi yapıyoruz.
         // Result içerisinde kodları yazdığımız için tekrar yazmamak için base ile parametreleri geçirdik. 
         public DataResult(T data,bool success, string message):base(success,message)
         {

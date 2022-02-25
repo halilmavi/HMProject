@@ -8,18 +8,19 @@ using System.Threading.Tasks;
 namespace HMCore.CrossCuttingConcerns
 {
     /* 
-        Tum katmanlarda kullanabilecegimiz bir dogrulama sistemi tanimladik. Validate metodunu ProductManager icerisinden tanimliyoruz ve parametrelerini gonderiyoruz.
-        Validate metoduna parametre olarak gondermis oldugumuz IValidate interface'i AbstractValidator sınıfına kalitim olarak eklendigi icin;
-        Business.ValidationRules.FluentValidation icerisinde tanimli olan ProductValidator sinifi
-        icerisinde tanimli olan ProductValidator constructori gelen nesnenin referansını IValidate  interface'i de tutmaktadır.
+        Tum katmanlarda kullanabilecegimiz bir dogrulama sistemi tanimladik. Validate metodunu ProductManager icerisinden tanımlıyoruz ve parametrelerini gönderiyoruz.
+        Validate metoduna göndermiş olduğumuz IValidator tipindeki tanımlanan validator nesnesi ile Validate metoduna erişim sağlacağız.
+        
     */
     public static class ValidationTool
     {
+        
         public static void Validate(IValidator validator, object entity)
         {
-            var context = new ValidationContext<object>(entity);
-            var result = validator.Validate(context);
-            if (!result.IsValid)
+            var context = new ValidationContext<object>(entity);            // Kullanıcıdan gelen datayı ValidationContext sınıfı türünde yeni bir nesne örneğine dönüştürür.
+            var result = validator.Validate(context);                       // Validate metoduna parametre olarakta datamızı  gönderme işlemi yapıyoruz.
+            
+            if (!result.IsValid)                                            // IsValid: Validasyon işleminin başarılı olup olmadığına dair boolean değer döndürür.
             {
                 throw new ValidationException(result.Errors);
 

@@ -17,6 +17,8 @@ using System.Threading.Tasks;
      DataAccess klasoru icerisinde tanimladik. Tanimlamis oldugumuz bu interfacemizi  EntityFramework klasoru  icerisinde tanimlamis oldugumuz EfEntityRepositoryBase
      class'ina kalitim olarak ekliyoruz.Olusturmus oldugumuz EfEntityRepositoryBase sinifta generic bir yapi tanimlayip parametrelerini TEntity,TContext olacak 
      sekilde tanimliyoruz. Parametreleri bu sekilde tanimlamamizin sebebi projemizdeki tüm uygulamalar bu metotlari kullanacagi icin ortak bir tur tanimlamamiz gerekiyor.
+     GetProductDetails metodu sadece ürünle ilgili bir metot olduğu için bu metodu HMCore katmanında tanımlamayız. Sadece ürüne özel kodlarımızı IProductDal sınıfında imzasını tanımlarız. 
+     EfProductDal sınıfında da metodun komutlarını yazarız.
 
  */
 

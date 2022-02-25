@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HMDataAccess.Abstract
 {
-    
+    // IEntityRepository interfaceni kalitim olarak verirken Category olarak parametresini tanimliyoruz. CRUD islemlerini yaparken Category'e gore yapmasını yapılandırdık.
     public interface ICategoryDal : IEntityRepository<Category>
     {
        
