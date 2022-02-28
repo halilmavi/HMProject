@@ -22,14 +22,17 @@ namespace HMCore.Aspects.Autofac.Validation
             // defensive coding(savunma odaklı kod);
             //  attribute'lar typeof ile calistigi icin ProductManager icerisinden ValidationAspect parametre olarak gonderilen  ProductValidator tipi yerine yanlis bir sey yazilsa(ornegin Product gibi)
             //   hata almayız calisma aninda bu hatayi aliriz. O yuzden gelen tip bilgisini(ProductValidator)  kontrol ettikten sonra işlem yaparız.
-            if (!typeof(IValidator).IsAssignableFrom(validatorType))
+            // IsAssignableFrom metodu validatorType'ın bir örneğinin IValidator için geçerli türdeki bir örneğe atanıp atanamayacağını tespit etmek için kullanıyoruz.
+            if (!typeof(IValidator).IsAssignableFrom(validatorType))       
             {
                 throw new System.Exception("Bu bir doğrulama sınıfı değil !");
             }
 
             _validatorType = validatorType;
         }
-        protected override void OnBefore(IInvocation invocation)
+
+
+        protected override void OnBefore(IInvocation invocation)      // MethodInterception sınıfı içerisinde virtual olarak tanımlanan OnBefore metomuduzu ezerek burada tanımlıyoruz.  
         {
             // Activator.CreateInstance ile reflection işlemi tanımlamış oluyoruz. Yani programın çalışma anında ProductManager içerisinden gelen ProductValidator'un intance'nı üretme işlemi yapmasını saglıyor.
             var validator = (IValidator)Activator.CreateInstance(_validatorType);
@@ -38,7 +41,7 @@ namespace HMCore.Aspects.Autofac.Validation
             // ValidationAspect attribute'nun tanımlandığı ilgili metodun parametrelerini gezip bir üst satırda yakalanan generic parametreyi yani entityType'i ilgili metodun parametresine esit olanı bulup entities icerisine ata. 
             var entities = invocation.Arguments.Where(t => t.GetType() == entityType);  
 
-            // Bulmus oldugumuz entities icerisindeki nesneyi static olarak olusturmus oldugumuz ValidationTool sinifinin Validate metoduna parametre olarak gonderme islemi yapiyoruz.
+            // Bulmus oldugumuz entities icerisindeki nesneyi static olarak olusturmus oldugumuz ValidationTool sınıfının Validate metoduna parametre olarak gönderme işlemi yapıyoruz.
             foreach (var entity in entities)
             {
                 // Validate metoduna parametre olarak gonderdigimiz validator icerisine ProductValidator'den gelen nesnenin instance'ni atadik. 

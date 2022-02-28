@@ -5,13 +5,15 @@ namespace HMCore.Utilities.Interceptors
 {
     public abstract class MethodInterception : MethodInterceptionBaseAttribute
     {
+        // invocation nesnesi business da çalıştırmak istediğimiz metodumuzu temsil etmektedir.
+        // virtual olarak tanımladığımız metotları başka yerde override ederek farklı işlemlerimizi tanımlarız.
         protected virtual void OnBefore(IInvocation invocation) { }
         protected virtual void OnAfter(IInvocation invocation) { }
         protected virtual void OnException(IInvocation invocation, System.Exception e) { }
         protected virtual void OnSuccess(IInvocation invocation) { }
 
 
-        public override void Intercept(IInvocation invocation)   // invocation nesnesi burada çalıştırmak istediğimiz metodumuzu temsil etmektedir.
+        public override void Intercept(IInvocation invocation)  
         {
             var isSuccess = true;
             OnBefore(invocation);                                // Attribute'ların  metotlarımızdan önce çalışması için OnBefore olarak tanımlıyoruz.

@@ -13,8 +13,9 @@ namespace HMBusiness.Constants
         public static string ProductNameInvalid = "Ürün ismi gecersiz.";
         public static string MaintenanceTime = "Sistem Bakımda";
         public static string ProductsListed = "Ürünler listelendi";
-        public static string ProductCountOfCategoryError = "Bir kategoride en fazla 10 urun olabilir.";
-        public static string ProductNameAlreadyExists = "Ayni isimde urun eklenemez.";
-        public static string CategoryLimitExceded = "Kategoriye en fazla 15 kategori eklenebilir.";
+        public static string ProductCountOfCategoryError = "Bir kategoride en fazla 10 ürün olabilir";
+        public static string ProductNameAlreadyExists = "Ayni isimde urun eklenemez";
+        public static string CategoryLimitExceded = "Kategori limiti aşıldığı için yeni ürün eklenemiyor";
+        
     }
 }

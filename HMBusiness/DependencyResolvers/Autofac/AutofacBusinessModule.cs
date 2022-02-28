@@ -22,12 +22,17 @@ namespace HMBusiness.DependencyResolvers.Autofac
             // Uygulamamizda bizden IProductService interface'i istenildigi zaman RegisterType bize ProductManagerdan nesne türetip bu nesnenin referansını verme islemi yapiyor.
             builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance();
             builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();               // GetExecutingAssembly() metodu ile çalışma anında uygulamanın kodlarına erişiriz.
 
-            // Çalışan uygulamalar içerisinde implemente edilmiş interfaceleri bul onlar için AspectInterceptorSelector metodunu çağır ve ValidationAspect attributenun çalışmasını tetikle.
-            // Yani burda yapmış olduğu temel işlem tüm sınıfları gezip Aspect attribute'una sahip sınıfı bulup o sınıfın attribute'nu tetikle.
+            /*
+             Çalışan uygulamalar içerisinde implemente edilmiş interfaceleri bul onlar için AspectInterceptorSelector sınıfını çağırarak bu sınıf içerisindeki SelectInterceptors
+               metodu ile attribute'a sahip sınıf ve metotları burdaki Selector içerisine atama işlemi yaparız.
+             Yani burda yapmış olduğu temel işlem tüm sınıfları gezip Aspect attribute'una sahip sınıfı bulup o sınıfın attribute'nu tetikle.
+            */
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()               
                 .EnableInterfaceInterceptors(new ProxyGenerationOptions()
                 {

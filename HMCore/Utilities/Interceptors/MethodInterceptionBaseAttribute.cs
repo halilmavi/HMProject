@@ -5,7 +5,7 @@ namespace HMCore.Utilities.Interceptors
 {
     
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)] // Class'lara ve method'lara ekleyebileceğimizi tanımladık.
-    public abstract class MethodInterceptionBaseAttribute : Attribute, IInterceptor
+    public abstract class MethodInterceptionBaseAttribute : Attribute, IInterceptor             // Temel sınıfımıza kalıtım olarak vermiş olduğumuz Attribute ve IInterceptor ile bu özelliklere sahip bir sınıf haline getiriyoruz. 
     {
 
         public int Priority { get; set; }           // Attribute'ların çalışma sırasını tanımladığımız propertymiz.(Örneğin validation loglamadan önce çalışsın veya cachelemeden önce çalışsın gibi.)
